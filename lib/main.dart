@@ -20,12 +20,12 @@ class SizeConfig{
    }
 }
 
-late int initScreen;
+late int? initScreen;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences pref = await SharedPreferences.getInstance();
-  initScreen = await pref.getInt("initScreen")!.toInt();
+  initScreen = await pref.getInt("initScreen");
   await pref.setInt("initScreen", 1);
   runApp(const MyApp());
 }
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: myThemeData(),
-      initialRoute: initScreen == 0 ? 'getStarted' : 'logIn' ,
+      initialRoute: initScreen == 0 || initScreen == null ? '/getStarted' : '/logIn' ,
       onGenerateRoute: generateRoute,
     //  to change use Navigator.of(context).pushNamed('/name', arguments: <args>)
     );
