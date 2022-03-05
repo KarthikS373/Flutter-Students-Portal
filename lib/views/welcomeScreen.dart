@@ -18,7 +18,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
         body: SwipeView(
           child: Container(
-            margin: EdgeInsets.only(bottom: 60),
+            margin: const EdgeInsets.only(bottom: 60),
             height: 15,
             decoration:const BoxDecoration(
               color: Colors.red
