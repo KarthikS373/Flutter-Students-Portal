@@ -1,0 +1,57 @@
+import 'package:flutter/material.dart';
+import 'package:studentsportal/Widgets/homeTileView.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      backgroundColor: Colors.grey,
+      extendBodyBehindAppBar: true,
+      body: SafeArea(
+        child: Center(
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.85,
+            margin: const EdgeInsets.only(bottom: 0, top: 35),
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
+              ),
+            ),
+            // child: Center(
+            //   child: GridView.count(
+            //     crossAxisCount: 2,
+            //     crossAxisSpacing: 12,
+            //     mainAxisSpacing: 8,
+            //     childAspectRatio: 1.3,
+            //     children:  const <Widget>[
+            //       HomeTiles(image: "assets/Images/logInimg.png", desc: "desc 1", name: "Tile 1"),
+            //       HomeTiles(image: "assets/Images/logInimg.png", desc: "desc 2", name: "Tile 2"),
+            //       HomeTiles(image: "assets/Images/logInimg.png", desc: "desc 3", name: "Tile 3"),
+            //       HomeTiles(image: "assets/Images/logInimg.png", desc: "desc 4", name: "Tile 4"),
+            //     ],
+            //   ),
+            // ),
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
