@@ -1,11 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import 'package:studentsportal/Models/Alert.dart';
-
-import '../Widgets/swipeIndicator.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,202 +10,127 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        margin: const EdgeInsets.only(top: 8),
-        child: ListView(
-          physics: const ClampingScrollPhysics(),
-          children: <Widget>[
-            // SECTION 1
-            Container(
-              margin: const EdgeInsets.only(left: 16, right: 16, top: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  GestureDetector(
-                    child: Image.asset("assets/Images/ig.png", width: 50),
-                    onTap: () {
-                      print("OPENS DRWAER");
-                    },
+      body: ListView(
+        children: <Widget>[
+          //  Section 1
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Announcements ",
+                  style: GoogleFonts.inder(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 1.5,
                   ),
-                  Container(
-                    height: 59,
-                    width: 59,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      image: const DecorationImage(
-                        image: AssetImage("assets/Images/ig.png"),
-                      ),
-                    ),
+                ),
+                Text(
+                  "View all",
+                  style: GoogleFonts.abel(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.5,
+                    color: Colors.blueAccent,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-
-            //  SECTION 2
-            const SizedBox(
-              height: 25,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 20.0,
-                right: 20.0,
-                bottom: 16,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "GOOD MORNING",
-                    style: GoogleFonts.inter(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black,
-                    ),
-                  ),
-                  Text(
-                    "USER",
-                    style: GoogleFonts.inter(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(
-                    height: 200,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      padding: const EdgeInsets.only(left: 15, right: 6),
-                      itemCount: recentAlerts.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        Alert _currentAlert = recentAlerts[index];
-                        late Color _cardColor;
-                        switch (_currentAlert.title) {
-                          case "Test":
-                            _cardColor = Colors.red;
-                            break;
-                          case "Quiz":
-                            _cardColor = Colors.blue;
-                            break;
-                          case "Assignment":
-                            _cardColor = Colors.yellow;
-                            break;
-                          case "Homework":
-                            _cardColor = Colors.orange;
-                            break;
-                          default:
-                            _cardColor = Colors.black;
-                        }
-                        ;
-                        return Container(
-                          height: 100,
-                          width: 350,
-                          margin: const EdgeInsets.only(right: 10),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 5),
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.33,
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemCount: recentAlerts.length,
+                itemBuilder: (context, index) {
+                  final item = recentAlerts[index];
+                  return Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 3),
+                        child: Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(28),
-                            color: _cardColor,
-                          ),
-                          child: Stack(
-                            children: <Widget>[
-                              Positioned(
-                                child: SvgPicture.network(
-                                    "https://bgjar.com/simple-shiny"),
-                                bottom: 0,
-                                right: 0,
-                              ),
-                              Positioned(
-                                left: 20,
-                                top: 25,
-                                child: Text(
-                                  '${_currentAlert.title} - ${_currentAlert.subject}',
-                                  style: GoogleFonts.inter(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                left: 20,
-                                top: 75,
-                                child: Row(
-                                  children: <Widget>[
-                                    const Icon(
-                                      Icons.question_answer,
-                                      color: Colors.white60,
-                                      size: 25,
-                                    ),
-                                    const SizedBox(
-                                      width: 20,
-                                    ),
-                                    Text(
-                                      _currentAlert.desc!,
-                                      style: GoogleFonts.inter(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.white,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Positioned(
-                                left: 20,
-                                top: 158,
-                                child: Row(
-                                  children: <Widget>[
-                                    const Icon(
-                                      Icons.timelapse_outlined,
-                                      color: Colors.white60,
-                                      size: 25,
-                                    ),
-                                    const SizedBox(
-                                      width: 20,
-                                    ),
-                                    Text(
-                                      "Due : ${DateFormat("EEEE").format(_currentAlert.time)}",
-                                      style: GoogleFonts.inter(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                            color: Colors.blueAccent,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(30),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.5),
+                                blurRadius: 15,
+                                offset: const Offset(5, 7),
                               ),
                             ],
                           ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          width: MediaQuery.of(context).size.width * 0.8,
+                        ),
+                      ),
+                      // Positioned(
+                      //   // top: 120,
+                      //   child: Text(
+                      //     "${item.title} - ${item.subject}",
+                      //     style: GoogleFonts.abel(
+                      //       color: Colors.black,
+                      //       fontWeight: FontWeight.w600,
+                      //       letterSpacing: 1.5,
+                      //       fontSize: 32,
+                      //     ),
+                      //   ),
+                      // ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 70,
+                              left: 0,
+                              right: 150,
+                              bottom: 0,
+                            ),
+                            child: Text(
+                              "${item.title} - ${item.subject}",
+                              style: GoogleFonts.abel(
+                                color: Colors.white70,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 1.5,
+                                fontSize: 32,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 0,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Icon(Icons.access_time)
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
-
-            // SECTION 3
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 15,
-                bottom: 15,
-                top: 30,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  const Text("Options"),
-                  buildSwipeSplash(context)
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

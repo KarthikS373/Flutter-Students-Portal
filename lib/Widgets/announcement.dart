@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:studentsportal/Models/announcmentList.dart';
-import 'package:studentsportal/Widgets/countDown.dart';
 
 class Announcements extends StatefulWidget {
   const Announcements({Key? key}) : super(key: key);
@@ -128,8 +127,8 @@ class _AnnouncementsState extends State<Announcements> {
                         ),
                         Text(
                           "${(_timeLeft == 1 || _timeLeft == 0 ? "hour" : "hours")} left",
-                          style: TextStyle(
-                            color: _customPaint(context, _percent),
+                          style: const TextStyle(
+                            // color: _customPaint(context, _percent),
                             fontSize: 10,
                             fontWeight: FontWeight.w600,
                           ),
@@ -144,9 +143,5 @@ class _AnnouncementsState extends State<Announcements> {
         );
       },
     );
-  }
-
-  _customPaint(BuildContext context, double _percent) {
-    if (_percent >= 0.35) return Theme.of(context).accentColor;
   }
 }

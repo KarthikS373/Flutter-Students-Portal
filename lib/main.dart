@@ -21,7 +21,6 @@ class SizeConfig{
 }
 
 late int? initScreen;
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences pref = await SharedPreferences.getInstance();
